@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+
 {# Load the tag library #}
 {% load bootstrap4 %}
 
@@ -9,6 +11,9 @@
 {% bootstrap_messages %}
 
 {# Display a form #}
+
+{% block body %}
+
 <form action="/url/to/submit/" method="post" class="form">
   {% csrf_token %}
   {% bootstrap_form form %}
@@ -18,5 +23,6 @@
     </button>
   {% endbuttons %}
 </form>
+{% endblock %}
 
 {# Read the documentation for more information #}
