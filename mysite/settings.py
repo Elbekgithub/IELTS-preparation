@@ -27,9 +27,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'location_field.apps.DefaultConfig',
+
+    'bootstrap_datepicker_plus',
+
     'bootstrap4',
     'main',
     'blog',
+    'accounts',
+    'teacher',
+    'student',
 
 ]
 
@@ -111,6 +118,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+
+AUTH_USER_MODEL = 'accounts.User'
+AUTHENTICATION_BACKENDS = ('accounts.backends.EmailBackend',)
+
+
+
+
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
@@ -120,3 +134,43 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_cdn')
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media_cdn')
+
+
+
+LOCATION_FIELD_PATH = STATIC_URL + 'location_field'
+
+LOCATION_FIELD = {
+    'map.provider': 'google',
+    'map.zoom': 13,
+
+    'search.provider': 'google',
+    'search.suffix': '',
+
+    # Google
+    'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
+    'provider.google.api_key': '<INSERT GOOGLE API KEY>',
+    'provider.google.api_libraries': '',
+    'provider.google.map.type': 'ROADMAP',
+
+    # Mapbox
+    'provider.mapbox.access_token': '',
+    'provider.mapbox.max_zoom': 18,
+    'provider.mapbox.id': 'mapbox.streets',
+
+    # OpenStreetMap
+    'provider.openstreetmap.max_zoom': 18,
+
+    # misc
+    'resources.root_path': LOCATION_FIELD_PATH,
+    'resources.media': {
+        'js': (
+            LOCATION_FIELD_PATH + '/js/form.js',
+        ),
+    },
+}
+
+
+os.environ['PATH'] = os.path.join(BASE_DIR, r'myvenv\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
+
+
+GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, r'myvenv\Lib\site-packages\osgeo\gdal203.dll') 

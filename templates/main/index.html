@@ -1,81 +1,77 @@
 {% extends 'base.html' %}
 
-{% block body %}
-<!--Navbar-->
-<nav class="navbar navbar-light light-blue lighten-4">
+{% block title %}Main page{% endblock %}
 
-    <!-- Navbar brand -->
-    <a class="navbar-brand" href="#">Navbar</a>
-  
-    <!-- Collapse button -->
-    <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
-      aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="dark-blue-text"><i
-          class="fas fa-bars fa-1x"></i></span></button>
-  
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
-  
-      <!-- Links -->
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-      </ul>
-      <!-- Links -->
-  
-    </div>
-    <!-- Collapsible content -->
-  
-  </nav>
-  <!--/.Navbar-->
+{% block stylesheet %}
+{% endblock %}
 
-  <div class="container">
-    <div class="row">
-      <div class="col-8">
-  <form>
-    <div class="form-group">
-      <label for="email2">Email address</label>
-      <input type="email" class="form-control" id="email2" aria-describedby="emailHelp" placeholder="Enter email">
-    </div>
-    
-    <div class="form-group">
-      <label for="password2">Password</label>
-      <input type="password" class="form-control" id="password2" placeholder="Password">
-    </div>
-    
-    <div class="form-group">
-      <label for="description1">Description</label>
-      <textarea class="form-control" id="description1" rows="3" placeholder="Write your description here..."></textarea>
-    </div>
-    
-    <div class="form-group">
-      <label for="group2">You can also add a picture</label>
-      <div class="input-group" id="group2">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="addon2"><i class="far fa-file-image"></i></span>
-        </div>
-        <div class="custom-file">
-          <input type="file" class="custom-file-input" id="file2" aria-describedby="addon2">
-          <label class="custom-file-label" for="file2">Choose file</label>
-        </div>
-      </div>
-    </div>
-    
-    <div class="custom-control custom-checkbox form-group">
-        <input type="checkbox" class="custom-control-input" id="checkTerms">
-        <label class="custom-control-label" for="checkTerms">I have read and understood the Terms & Conditions.</label>
-    </div>
-    <button type="submit" class="btn btn-info">Submit</button>
-  </form>
+{% block script %}
+{% endblock %}
 
-  </div>
-  </div>
-  </div>
+{% block header %}
 
+<nav class="navbar fixed-top navbar-expand-lg  scrolling-navbar">
+    <a class="navbar-brand" href="#"><strong>Navbar</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Opinions</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">Dropdown
+                </a>
+                <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
+        </ul>
+        <ul class="navbar-nav nav-flex-icons">
+            <li class="nav-item">
+                <a class="nav-link waves-effect t waves-light">
+                  <i class="fab fa-twitter"></i>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link waves-effect waves-light">
+                  <i class="fab fa-google-plus-g"></i>
+                </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-user"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-default"
+                  aria-labelledby="navbarDropdownMenuLink-333">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
+        </ul>
+    </div>
+</nav>
+{% endblock %}
+
+{% block main %}
+This is main page
+{% endblock %}
+
+
+{% block footer %}
 {% endblock %}
