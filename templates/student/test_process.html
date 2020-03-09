@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block title %}mock list{% endblock %}
+
+{% block stylesheet %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block script %}
+<script>
+  document.getElementById("Play").addEventListener("click", function(music){
+  var audioElement = document.getElementById("Audio");
+  audioElement.play();
+}, false);
+</script>
+{% endblock %}
+
+
+{% block main %}
+  
+<!-- Nav tabs -->
+<div class="row">
+  <div class="col-11">
+    <!-- Tab panels -->
+    <div class="tab-content vertical">
+      <!-- Panel 1 -->
+      <div class="tab-pane fade in show active" id="panel21" role="tabpanel">
+        <div class="overflow-auto">
+        <h3 class="my-2 h5">Listening</h3>
+        <audio id="Audio" controls>
+          <source src="{{ mock.listening.audio.url }}" type="audio/mpeg">
+        </audio>
+        <div id="Play">Play Button</div>
+        {{ mock.listening.audio.url }}
+          <p>Section1</p>
+          {{ mock.listening.section1|safe }}
+          <hr>
+          <p>Section 2</p>
+          {{ mock.listening.section2|safe }}
+          <hr>
+          <p>Section 3</p>
+          {{ mock.listening.section3|safe }}</p>
+          <hr>
+          <p>Section 4</p>
+          {{ mock.listening.section4 }}
+        </div>
+      </div>
+      <!-- Panel 1 -->
+      <!-- Panel 2 -->
+      <div class="tab-pane fade" id="panel22" role="tabpanel">
+        <h3 class="my-2 h5">Reading</h3>
+        <p>Passage 1</p>
+        {{ mock.reading.passage1 }}
+        <hr>
+        <p>Passage 2</p>
+        {{ mock.reading.passage2 }}
+        <hr>
+        <p>Passage 3</p>
+        {{ mock.reading.passage3 }}
+      </div>
+      <!-- Panel 2 -->
+      <!-- Panel 3 -->
+      <div class="tab-pane fade" id="panel23" role="tabpanel">
+        <h5 class="my-2 h5">Writing</h5>
+        <img class="rounded mx-auto d-block" src="{{ mock.writing.image.url }}" alt="" width="600px" height="400px">
+        <p>Task 1</p>
+        {{ mock.writing.task1 }}
+        <hr>
+        <p>Task 2</p>
+        {{ mock.writing.task2 }}
+      </div>
+      <!-- Panel 3 -->
+      <!-- Panel 4 -->
+      <div class="tab-pane fade" id="panel24" role="tabpanel">
+        <h5 class="my-2 h5">Speaking</h5>
+        <P>Part 1</P>
+        {{ mock.speaking.part1 }}
+        <hr>
+        <p>Part 2</p>
+        {{ mock.speaking.part2 }}
+        <hr>
+        <p>Part 3</p>
+        {{ mock.speaking.part3 }}
+      </div>
+      <!-- Panel 4 -->
+    </div>
+  </div>
+  <div class="col-1">
+    <div class="position-fixed">
+    <ul class="nav md-pills pills-primary flex-column" style="" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#panel21" role="tab">
+          <i class="fas fa-headphones ml-2"></i>
+          Listening
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#panel22" role="tab">
+          <i class="fas fa-book-open ml-2"></i>
+          Reading
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#panel23" role="tab">
+          <i class="fas fa-edit ml-2"></i>
+          Writng
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#panel24" role="tab">
+          <i class="fas fa-microphone ml-2"></i>
+          Speaking
+        </a>
+      </li>
+    </ul>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#fullHeightModalRight">
+      Answer reading
+    </button>
+    
+    </div>
+  </div>
+</div>
+<!-- Nav tabs -->
+
+<!-- Button trigger modal -->
+
+<!-- Full Height Modal Right -->
+<div class="modal fade right" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+  <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+  <div class="modal-dialog modal-full-height modal-right" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Full Height Modal Right -->
+
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

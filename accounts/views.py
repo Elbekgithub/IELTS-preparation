@@ -8,7 +8,8 @@ from .models import Teacher, Student
 from .forms import UserLoginFom, TeacherCreationForm, StudentCreationForm
 
 def login_view(request):
-    title = "Login"
+    title = "Sign in"
+    log = True
     next = request.GET.get('next')
     form = UserLoginFom(request.POST or None)
     if form.is_valid():
@@ -20,14 +21,15 @@ def login_view(request):
         if next:
             return redirect(next)
         if user.is_teacher:
-            return redirect("teacher")
+            return redirect("teacher:mock_list")
         if user.is_student:
-            return redirect('student')
-    return render(request, 'accounts/form.html', {'form':form, 'title': title})
+            return redirect('student:student')
+    return render(request, 'accounts/form.html', {'form':form, 'title': title, 'login':login})
 
 
 def student_create(request):
-    title = "Student Signup"
+    title = "Sign up"
+    login = False
     next = request.GET.get('next')
     form = StudentCreationForm(request.POST or None)
     if form.is_valid():
@@ -41,13 +43,14 @@ def student_create(request):
         login(request, new_user)
         if next:
             return redirect(next)
-        return redirect("/") 
+        return redirect("student:student") 
     context = {
         'title': title,
         'form': form,
+        'login':login
     }
     return render(request, 'accounts/form.html', context)
 
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return redirect('main:index')

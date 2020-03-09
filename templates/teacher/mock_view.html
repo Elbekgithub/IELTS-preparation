@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block title %}mock list{% endblock %}
+
+{% block stylesheet %}
+<style>
+</style>
+{% endblock %}
+
+{% block script %}
+<script>
+</script>
+{% endblock %}
+
+
+{% block main %}
+  
+
+<div class="row justify-content-center">
+  <div class="col-10">
+    <div class="card">
+      <h5 class="card-header white-text text-center ">View</h5>
+      <div class="card-body">
+        <ul class="nav md-pills pills-primary">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#panel11" role="tab">Test content</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#panel12" role="tab">Reading</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#panel13" role="tab">Listening</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#panel14" role="tab">Writing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#panel15" role="tab">Speaking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#panel16" role="tab">Answer Listening</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#panel17" role="tab">Answer Reading</a>
+          </li>
+        </ul>
+        
+        <!-- Tab panels -->
+        <div class="tab-content pt-0">
+        
+          <!--Panel 1-->
+          <div class="tab-pane fade in show active" id="panel11" role="tabpanel">
+            <br>
+            <h5 class="card-title">{{ mock.name }}</h5>
+            <p class="card-text">{{ mock.bio }}
+            <p>The test created at {{ mock.time_created }}</p>
+            <p>The mock test will start at {{ mock.time_start }}</p>
+            <p>Speaking exam will be hold in {{ mock.speak_date }}</p>
+            </p>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Full name</th>
+                  <th scope="col">Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in mock.registerations.all %}
+                <tr>
+                  <th scope="row">{{ forloop.counter }}</th>
+                  <td>{{ user.username }}</td>
+                  <td>{{ user.get_full_name }}</td>
+                  <td>{{ user.email }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <a href="#" class="btn btn-secondary btn-sm">Edit</a>
+        
+          </div>
+          <!--/.Panel 1-->
+        
+          <!--Panel 2-->
+          <div class="tab-pane fade" id="panel12" role="tabpanel">
+            <br>
+        
+            <h5 class="card-title">Passage 1</h5>
+            <p class="card-text">{{ mock.reading.passage1 }}</p>
+            <h5 class="card-title">Passage 2</h5>
+            <p class="card-text">{{ mock.reading.passage2 }}</p>
+            <h5 class="card-title">Passage 3</h5>
+            <p class="card-text">{{ mock.reading.passage3 }}</p>
+            <a href="#" class="btn btn-secondary btn-sm">Edit</a>
+        
+          </div>
+          <!--/.Panel 2-->
+        
+          <!--Panel 3-->
+          <div class="tab-pane fade" id="panel13" role="tabpanel">
+            <br>
+        
+            <h5 class="card-title">Section 1</h5>
+            <p class="card-text">{{ mock.listening.section1|safe }}</p>
+            <h5 class="card-title">Section 2</h5>
+            <p class="card-text">{{ mock.listening.section2|safe }}</p>
+            <h5 class="card-title">Section 3</h5>
+            <p class="card-text">{{ mock.listening.section3|safe }}</p>
+            <h5 class="card-title">Section 4</h5>
+            <p class="card-text">{{ mock.listening.section4 }}</p>
+            
+            <a href="#" class="btn btn-secondary btn-sm">Edit</a>
+        
+          </div>
+          <!--/.Panel 3-->
+        
+          <!--Panel 4-->
+          <div class="tab-pane fade" id="panel14" role="tabpanel">
+            <br>
+            <img class="card-img-top" src="{{ mock.writing.image.url }}" alt="Card image cap">
+            <h5 class="card-title">Task 1</h5>
+            <p class="card-text">{{ mock.writing.task1 }}</p>
+            <h5 class="card-title">Task 2</h5>
+            <p class="card-text">{{ mock.writing.task2 }}</p>
+            <a href="#" class="btn btn-secondary btn-sm">Edit</a>
+          </div>
+          <!--/.Panel 4-->
+          <!--Panel 5-->
+          <div class="tab-pane fade" id="panel15" role="tabpanel">
+            <br>
+            
+            <h5 class="card-title">Part 1</h5>
+            <p class="card-text">{{ mock.speaking.part1 }}</p>
+            <h5 class="card-title">Part 2</h5>
+            <p class="card-text">{{ mock.speaking.part2 }}</p>
+            <h5 class="card-title">Part 3</h5>
+            <p class="card-text">{{ mock.speaking.part3 }}</p>
+            <a href="#" class="btn btn-secondary btn-sm">Edit</a>
+        
+          </div>
+          <!--/.Panel 5-->
+          <!--Panel 6-->
+          <div class="tab-pane fade" id="panel16" role="tabpanel">
+            <br>
+        
+            <h5 class="card-title">Listening answers, you can update</h5>
+            <form action="" method="post" enctype="multipart/form-data" novalidate>
+              {% csrf_token %}
+              {% bootstrap_form form_l %}
+              {% buttons %}
+                  <button type="submit" class="btn btn-secondary btn-sm">
+                      Update
+                  </button>
+              {% endbuttons %}
+          </div>
+          <!--/.Panel 6-->
+          <!--Panel 7-->
+          <div class="tab-pane fade" id="panel17" role="tabpanel">
+            <br>
+        
+            <h5 class="card-title">Reading answers, you can update</h5>
+            <form action="" method="post" enctype="multipart/form-data" novalidate>
+              {% csrf_token %}
+              {% bootstrap_form form_r %}
+              {% buttons %}
+                  <button type="submit" class="btn btn-secondary btn-sm">
+                      Update
+                  </button>
+              {% endbuttons %}
+        
+          </div>
+          <!--/.Panel 7-->
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

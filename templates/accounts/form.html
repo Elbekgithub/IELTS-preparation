@@ -1,101 +1,80 @@
-{% extends 'base.html' %}
+{% extends 'base_main.html' %}
 {% load static %}
 {% load bootstrap4 %}
 
 {% block stylesheet %}
 {{ form.media.css }}
-
+<style>
+  .card .card-header {
+    background: #3F5C80;
+  }
+  .btn-outline-info{
+    border: 1px solid #3F5C80 !important;
+    color: #3F5C80 !important;
+  }
+</style>
 {% endblock %}
 
 {% block script %}
-
 {{ form.media.js }}
-
 {% endblock %}
+        
+{% block main %}
+<div class="row justify-content-center">
+  <div class="col-5">
+    
+      <!-- Material form login -->
+      <div class="card">
 
-{% block navbar %}
-    <!-- Navbar -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
-      <div class="container-fluid">
+        <h5 class="card-header  white-text text-center">
+          <strong>{{ title }}</strong>
+        </h5>
 
-        <!-- Brand -->
-        <a class="navbar-brand waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
-          <strong class="blue-text">MDB</strong>
-        </a>
+        <!--Card content-->
+        <div class="card-body px-lg-5 pt-0">
 
-        <!-- Collapse -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Links -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-          <!-- Left -->
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link waves-effect" href="#">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">About
-                MDB</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link waves-effect" href="https://mdbootstrap.com/docs/jquery/getting-started/download/"
-                target="_blank">Free
-                download</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link waves-effect" href="https://mdbootstrap.com/education/bootstrap/" target="_blank">Free
-                tutorials</a>
-            </li>
-          </ul>
-
-          <!-- Right -->
-          <ul class="navbar-nav nav-flex-icons">
-            <li class="nav-item">
-              <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect" target="_blank">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="https://twitter.com/MDBootstrap" class="nav-link waves-effect" target="_blank">
-                <i class="fab fa-twitter"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="nav-link border border-light rounded waves-effect"
-                target="_blank">
-                <i class="fab fa-github mr-2"></i>MDB GitHub
-              </a>
-            </li>
-          </ul>
-
-        </div>
-
-      </div>
-    </nav>
-    <!-- Navbar -->
-{% endblock %}
-
-
-{% block main_outer %}
-
-<div class="row justify-content-md-center">
-    <div class='col-sm-6'>
-        <h2 class="pb-2 mt-4 mb-2 border-bottom">{{ title }}</h2>
-        <form action="" method="post" enctype="multipart/form-data" novalidate>
+          <!-- Form -->
+          <form class="text-center" style="color: #757575;" action="" method="post" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
+            <div class="md-form">
             {% bootstrap_form form %}
+            </div> 
             {% buttons %}
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-outline-info btn-block my-5 py-2 waves-effect z-depth-0">
                     {{ title }}
                 </button>
             {% endbuttons %}
-        </form>
-    </div>
+            </form>
+            {% if login %}
+            <!-- Register -->
+            <p>Not a member?
+              <a href="{% url 'accounts:student_create'  %}">Sign up</a>
+            </p>
+
+            <!-- Social login -->
+            <p>or sign in with:</p>
+            <a type="button" class="btn-floating btn-fb btn-sm">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a type="button" class="btn-floating btn-tw btn-sm">
+              <i class="fab fa-google"></i>
+            </a>
+            <a type="button" class="btn-floating btn-li btn-sm">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a type="button" class="btn-floating btn-git btn-sm">
+              <i class="fab fa-github"></i>
+            </a>
+            {% else %}
+            <p>Already a member?
+              <a href="{% url 'accounts:login'  %}">Sign in</a>
+            </p>
+            {% endif %}
+        </div>
+
+      </div>
+      <!-- Material form login -->
+  </div>
 </div>
+
 {% endblock %}

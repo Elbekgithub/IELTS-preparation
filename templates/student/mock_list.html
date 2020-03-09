@@ -22,17 +22,14 @@
           <strong>Mock List</strong>
         </h5>
         <div class="card-body">
-          <div id="table" class="">
-            <span class="table-add float-left mb-3 mr-2"><a href="{% url 'teacher:new_mock' %}" class="text-primary"><i
-                  class="fas fa-plus fa-2x" aria-hidden="true"></i></a></span>
-                  <table class="table  table-responsive-md btn-table">
-
+                  <table class="table table-striped">
                     <thead>
                       <tr>
                         <th>#</th>
                         <th>Name</th>
                         <th>Start time</th>
                         <th>Free/Paid</th>
+                        <th>Owner</th>
                         <th>Takers</th>
                       </tr>
                     </thead>
@@ -48,17 +45,23 @@
                         {% else %}
                         <td>paid</td>
                         {% endif %}
+                        <td>{{ test.user.get_full_name }}</td>
                         <td>{{ test.total_registers }}</td>
                         <td>
-                          <a class="btn btn-outline-default btn-sm py-1 z-depth-1" style="border: 1.5px solid #3F5C80 !important" href="{{ test.get_absolute_url }}">View</a> 
+                        {% if test.is_free %}
+                        {% if request.user in test.registerations.all %}
+                          <a class="btn btn-outline-default btn-sm py-1 z-depth-1" style="border: 1.5px solid #3F5C80 !important" href="{% url 'student:mock_view' test.slug %}">View</a>
+                        {% else %}
+                          <a class="btn btn-outline-primary btn-sm py-1 z-depth-1" style="border: 1.5px solid  !important" href="{% url 'student:mock_view' test.slug %}">Register</a>
+                        {% endif %}
+                        {% else %}
+                          <a class="btn btn-outline-success btn-sm py-1 z-depth-1" style="border: 1.5px solid  !important" href="#">Payment</a>
+                        {% endif %}
                         </td>
                       </tr>
                       {% endfor %}
-                      <tr>
                     </tbody>
-                  
                   </table>
-          </div>
         </div>
       </div>
       <!-- Editable table -->

@@ -12,8 +12,8 @@ from bootstrap_datepicker_plus import DatePickerInput
 User = get_user_model()
 
 class UserLoginFom(forms.Form):
-    username = forms.CharField(label='Uername or Email', widget=forms.TextInput(attrs={'autofocus': True,}))
-    password = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(label=False, widget=forms.TextInput(attrs={'autofocus': True, 'placeholder':'Username or Email'}))
+    password = forms.CharField(label=False,widget=forms.PasswordInput(attrs={'placeholder':'Password'}))
 
     def clean(self, *args, **kwargs):
         username = self.cleaned_data.get("username")
@@ -64,10 +64,10 @@ class TeacherCreationForm(forms.ModelForm):
 
 
 class StudentCreationForm(forms.ModelForm):
-    """A form for creating new users. Includes all the required
-    fields, plus a repeated password."""
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    username = forms.CharField(label=False, widget=forms.TextInput(attrs={'autofocus': True, 'placeholder':'Username'}))
+    email = forms.CharField(label=False, widget=forms.EmailInput(attrs={'placeholder':'Email'}))
+    password1 = forms.CharField(label=False, widget=forms.PasswordInput(attrs={'placeholder':'Password'}))
+    password2 = forms.CharField(label=False, widget=forms.PasswordInput(attrs={'placeholder':'Password confirmation'}))
 
     class Meta:
         model = User

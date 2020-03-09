@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block title %}New Mock{% endblock %}
+
+{% block stylesheet %}
+{{ form.media.css }}
+<style>
+</style>
+{% endblock %}
+
+{% block script %}
+{{ form.media.js }}
+<script>
+$('.datepicker').pickadate({format:'yyyy-mm-dd',formatSubmit: 'yyyy-mm-dd', });
+</script>
+{% endblock %}
+
+
+{% block main %}
+<div class="row justify-content-center">
+  <div class="col-6">
+      <!-- Editable table -->
+      <div class="card">
+        <h5 class="card-header white-text text-center"><strong>New Test</strong></h5>
+        <div class="card-body">
+          <form class="p-3" style="color: #757575;" action="" method="post" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            {% bootstrap_form form size="small" label_class="form-label col-md-3"%}
+            {% buttons %}
+                <button type="submit" class="btn btn-outline-default py-2 px-5 z-depth-1" style="border: 1.5px solid #3F5C80 !important">
+                    Submit
+                </button>
+            {% endbuttons %}
+          </form>
+        </div>
+      </div>
+      <!-- Editable table -->
+  </div>
+</div>
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

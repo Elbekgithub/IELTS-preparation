@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block title %}New Mock{% endblock %}
+
+{% block stylesheet %}
+{{ form.media.css }}
+<style>
+</style>
+{% endblock %}
+
+{% block script %}
+{{ form.media.js }}
+<script>
+</script>
+{% endblock %}
+
+
+{% block main %}
+<div class="row justify-content-center">
+  <div class="col-8">
+      <!-- Editable table -->
+      <div class="card">
+        <h5 class="card-header white-text text-center">{{ title }}</h5>
+        <div class="card-body">
+          <form class="p-3" action="" method="post" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-outline-default py-2 px-5 z-depth-1" style="border: 1.5px solid #3F5C80 !important">
+                    Submit
+                </button>
+            {% endbuttons %}
+          </form>
+        </div>
+      </div>
+      <!-- Editable table -->
+    </div>
+</div>
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

@@ -5,11 +5,11 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('main.urls')),
-    path('blog/', include('blog.urls')),
-    path('accounts/', include('accounts.urls')),
-    path('teacher/', include('teacher.urls')),
-    path('student/', include('student.urls')),
+    path('', include(('main.urls','main'), namespace='main')),
+    path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
+    path('accounts/', include(('accounts.urls', 'accounts') ,namespace='accounts')),
+    path('teacher/', include(('teacher.urls','teacher'), namespace='teacher')),
+    path('student/', include(('student.urls', 'student'), namespace='student')),
 
 
 ]
