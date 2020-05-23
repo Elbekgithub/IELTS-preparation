@@ -9,20 +9,20 @@
 
 {% block script %}
 <script>
+  $('#dtMaterialDesignExample2').DataTable();
 </script>
 {% endblock %}
 
 
 {% block main %}
 <div class="row justify-content-center">
-  <div class="col-8">
+  <div class="col-10">
       <!-- Editable table -->
+      <h5 class="my-4 dark-grey-text font-weight-bold text-capitalize">Mock tests list</h5>
       <div class="card">
-        <h5 class="card-header white-text text-center">
-          <strong>Mock List</strong>
-        </h5>
-        <div class="card-body">
-                  <table class="table table-striped">
+        <div class="card-body  px-4 my-3">
+          <table id="dtMaterialDesignExample2" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+
                     <thead>
                       <tr>
                         <th>#</th>
@@ -31,6 +31,7 @@
                         <th>Free/Paid</th>
                         <th>Owner</th>
                         <th>Takers</th>
+                        <th></th>
                       </tr>
                     </thead>
                   
@@ -67,6 +68,7 @@
       <!-- Editable table -->
     </div>
 </div>
+
 {% endblock %}
 
 

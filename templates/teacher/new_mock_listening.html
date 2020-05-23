@@ -5,34 +5,29 @@
 
 {% block stylesheet %}
 {{ form.media.css }}
-<link rel="stylesheet" href="{% static 'cleditor/jquery.cleditor.css' %}" />
 <style>
 </style>
 {% endblock %}
 
 {% block script %}
 {{ form.media.js }}
-<script src="{% static 'cleditor/jquery.min.js' %}"></script>
-<script src="{% static 'cleditor/jquery.cleditor.min.js' %}"></script>
-<script src="{% static 'cleditor/jquery.cleditor.xhtml.min.js' %}"></script>
 <script>
-  $(document).ready(function () { $("#inputplugin").cleditor(); });
 </script>
 {% endblock %}
 
 
 {% block main %}
 <div class="row justify-content-center">
-  <div class="col-8">
+  <div class="col-11">
       <!-- Editable table -->
-      <div class="card">
-        <h5 class="card-header white-text text-center"><strong>{{ title }}</strong></h5>
+      <h5 class="my-4 dark-grey-text font-weight-bold text-capitalize">{{ title }}</h5>
+      <div class="card my-2">
         <div class="card-body">
-          <form class="p-3" action="" method="post" enctype="multipart/form-data" novalidate>
+          <form class="" action="" method="post" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
-            {% bootstrap_form form size="small" label_class="form-label col-md-3"%}
+            {% bootstrap_form form size="large" label_class="form-label col-md-3"%}
             {% buttons %}
-                <button type="submit" class="btn btn-outline-default py-2 px-5 z-depth-1" style="border: 1.5px solid #3F5C80 !important">
+                <button type="submit" class="btn btn-outline-default py-2 px-5 z-depth-1 float-right" style="border: 1.5px solid #3F5C80 !important">
                     Submit
                 </button>
             {% endbuttons %}

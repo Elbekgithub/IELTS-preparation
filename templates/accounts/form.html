@@ -1,3 +1,4 @@
+
 {% extends 'base_main.html' %}
 {% load static %}
 {% load bootstrap4 %}
@@ -5,13 +6,6 @@
 {% block stylesheet %}
 {{ form.media.css }}
 <style>
-  .card .card-header {
-    background: #3F5C80;
-  }
-  .btn-outline-info{
-    border: 1px solid #3F5C80 !important;
-    color: #3F5C80 !important;
-  }
 </style>
 {% endblock %}
 
@@ -21,31 +15,23 @@
         
 {% block main %}
 <div class="row justify-content-center">
-  <div class="col-5">
+  <div class="col-md-5 col-lg-5 col-sm-5 my-5">
     
       <!-- Material form login -->
       <div class="card">
-
-        <h5 class="card-header  white-text text-center">
-          <strong>{{ title }}</strong>
-        </h5>
-
         <!--Card content-->
         <div class="card-body px-lg-5 pt-0">
-
-          <!-- Form -->
-          <form class="text-center" style="color: #757575;" action="" method="post" enctype="multipart/form-data" novalidate>
+          <h5 class=" text-center my-4 dark-grey-text font-weight-bold">{{ title }}</h5>
+          <form class="text-center" action="" method="post" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
-            <div class="md-form">
             {% bootstrap_form form %}
-            </div> 
             {% buttons %}
                 <button type="submit" class="btn btn-outline-info btn-block my-5 py-2 waves-effect z-depth-0">
                     {{ title }}
                 </button>
             {% endbuttons %}
             </form>
-            {% if login %}
+            {% if title == "Sign in" %}
             <!-- Register -->
             <p>Not a member?
               <a href="{% url 'accounts:student_create'  %}">Sign up</a>

@@ -9,20 +9,20 @@
 
 {% block script %}
 <script>
+  $('#dtMaterialDesignExample2').DataTable();
 </script>
 {% endblock %}
 
 
 {% block main %}
 <div class="row justify-content-center">
-  <div class="col-8">
+  <div class="col-10">
       <!-- Editable table -->
+      <h5 class="my-4 dark-grey-text font-weight-bold text-capitalize">My tests</h5>
       <div class="card">
-        <h5 class="card-header white-text text-center">
-          <strong>Mock List</strong>
-        </h5>
-        <div class="card-body">
-                  <table class="table table-striped">
+        <div class="card-body  px-4 my-3">
+          <table id="dtMaterialDesignExample2" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+
                     <thead>
                       <tr>
                         <th>#</th>
@@ -43,14 +43,14 @@
                         <td>{{ test.total_registers }}</td>
                         <td>{{ test.time_start|timeuntil:now }}</td>
                         <td>
-                          {% if test.time_start.day == now.day %}  
+                          {% if test.time_start.day == now.day %}
                           <a class="btn btn-outline-default btn-sm py-1 z-depth-1" style="border: 1.5px solid #3F5C80 !important" href="{% url 'student:test_process' test.slug %}">Begin</a>
                           {% else %}
                           <a class="btn btn-outline-default btn-sm py-1 z-depth-1" style="border: 1.5px solid #3F5C80 !important" href="{% url 'student:mock_view' test.slug %}">View</a>
                           {% endif %}
                         </td>
-                      <tr>
-                        {% endfor %}
+                      </tr>
+                      {% endfor %}
                     </tbody>
                   </table>
         </div>

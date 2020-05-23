@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load mapbox_location_field_tags %}
+{% location_field_includes %}
+{% include_jquery %}
+{% load static %}
+
+{% load bootstrap4 %}
+{% block title %}mock list{% endblock %}
+
+{% block stylesheet %}
+<link href="{% static 'css/addons/cards-extended.min.css' %}" rel="stylesheet">
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.css" rel="stylesheet" />
+{{ form.media.css }}
+<style>
+ #map{
+   height: 500px;
+   width: 100%;
+ }
+</style>
+{% endblock %}
+
+{% block script %}
+{{ form.media.js }}
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js"></script>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYWxsb3lvcm92ZWxiZWsiLCJhIjoiY2s5ZnA3eTRiMGR0eDNlcW1hMDFna3A0biJ9.Jw4TnqSliBdenFpOiOu6qA';
+    var map = new mapboxgl.Map({
+        container: 'map', // container id
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [{{ x }},{{ y }}], // starting position
+        zoom: 9 // starting zoom
+    });
+
+    // Add zoom and rotation controls to the map.
+    map.addControl(new mapboxgl.NavigationControl());
+    </script>
+{% endblock %}
+
+
+{% block main %}
+<div class="row justify-content-center">
+            <div class="col-md-3 col-sm-3 col-xl-3">
+                <h5 class="mt-4 dark-grey-text font-weight-bold">Personal Info</h5>
+                <!--Section: Group of personal cards-->
+                <section class="pt-3 pb-3">
+                        <div class="card card-personal mb-4">
+                
+                            <!--Card image-->
+                            <div class="view">
+                            <img class="card-img-top" src="{{ request.user.teacher.avatar.url }}" alt="Card image cap">
+                            <a href="#!">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                            </div>
+                            <!--Card image-->
+                
+                            <!--Card content-->
+                            <div class="card-body">
+                            <!--Title-->
+                            <a>
+                                <h4 class="card-title">{{ request.user }} </h4>
+                            </a>
+                            <hr>
+                            <!--Text-->
+                            <p class="card-text">First name</p>
+                            <a class="card-meta">{{ request.user.first_name|default:'First name non exsisted' }}</a>
+                            <hr>
+                            <p class="card-text">Family name</p>
+                            <a class="card-meta">{{ request.user.last_name|default:'Family name non exsisted' }}</a>
+                            <hr>
+                            <p class="card-text">Email</p>
+                            <a class="card-meta">{{ request.user.email}}</a>
+                            <hr>
+                            <a class="btn btn-outline-primary btn-sm py-1 mr-0 float-right" style="border: 1.5px solid  !important; font-size:12px; " href="" data-toggle="modal" data-target="#modalLoginForm">Edit</a>
+                            </div>
+                            <!--Card content-->
+                
+                        </div>
+                </section>
+                <!--Section: Group of personal cards-->
+
+                <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Edit your personal info</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                            <form style="color: #757575;" action="{% url 'accounts:profile' %}" method="post" enctype="multipart/form-data" novalidate>
+                                {% csrf_token %}
+                                <div>
+                                {% bootstrap_form form %}
+                                </div> 
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-default">Submit</button>
+                        </div>
+                    </form>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+            <div class="col-md-9 col-sm-9 col-xl-9">
+                <h5 class="mt-4 dark-grey-text font-weight-bold">Teacher Info</h5>
+                <section class="pt-3 pb-3">
+                    <div class="card promoting-card">
+
+                      
+                        <!-- Card image -->
+                        <div class="view overlay">
+                          <div id="map"></div>
+                        </div>
+                      
+                        <!-- Card content -->
+                        <div class="card-body">
+                        <hr>
+                          <table class="table table-borderless">
+                            <tbody>
+                              <tr style="font-size: 15px;">
+                                <th scope="row" class="" style="width:5px;">
+                                    <i class="fas fa-map-marker-alt living-coral-text"></i>
+                                </th>
+                                <td >{{ teacher.education_centre }}</td>
+                              </tr>
+                              <tr class="mt-2">
+                                <th scope="row">
+                                  <i class="far fa-clock living-coral-text"></i>
+                                </th>
+                                <td>{{ teacher.birth_date }}</td>
+                              </tr>
+                              <tr class="mt-2">
+                                <th scope="row">
+                                  <i class="fas fa-phone living-coral-text"></i>
+                                </th>
+                                <td>{{ teacher.phone }}</td>
+                              </tr>
+                              <tr class="mt-2">
+                                <th scope="row">
+                                  <i class="fas fa-cloud living-coral-text"></i>
+                                </th>
+                                <td>{{ teacher.bio }}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        <hr>
+                        <a class="btn btn-outline-primary btn-sm py-1 mr-0 float-right" style="border: 1.5px solid  !important; font-size:12px;" href="{% url 'accounts:teacher_change' %}">Edit</a>
+                        </div>
+                      
+                      </div>
+            </section>
+            </div>
+    </div>
+</div>
+{{ form.media.js }}
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

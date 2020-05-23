@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
 from django.urls import reverse
+from ckeditor_uploader.fields import RichTextUploadingField
 
 User = get_user_model()
 
@@ -45,31 +46,32 @@ class Listening(models.Model):
     mocktest        =models.OneToOneField(MockTest, on_delete=models.CASCADE)
     audio           = models.FileField(upload_to = upload_location,)
     pdf             = models.FileField(upload_to = upload_location,)
-    section1        = models.TextField()
-    section2        = models.TextField()
-    section3        = models.TextField()
-    section4        = models.TextField()
+    section1        = RichTextUploadingField()
+    section2        = RichTextUploadingField()
+    section3        = RichTextUploadingField()
+    section4        = RichTextUploadingField()
 
 class Reading(models.Model):
     mocktest        =models.OneToOneField(MockTest, on_delete=models.CASCADE)
     pdf             = models.FileField(upload_to = upload_location,)
-    passage1        = models.TextField()
-    passage2        = models.TextField()
-    passage3        = models.TextField()
+    passage1        = RichTextUploadingField()
+    passage2        = RichTextUploadingField()
+    passage3        = RichTextUploadingField()
 
 class Writing(models.Model):
     mocktest        =models.OneToOneField(MockTest, on_delete=models.CASCADE)
     pdf             = models.FileField(upload_to = upload_location,)
-    task1           = models.TextField()
-    task2           = models.TextField()
+    task1           = RichTextUploadingField()
+    task2           = RichTextUploadingField()
     image           = models.ImageField(upload_to = upload_location,null=True, blank=True,)
 
 class Speaking(models.Model):
     mocktest        =models.OneToOneField(MockTest, on_delete=models.CASCADE)
     pdf             = models.FileField(upload_to = upload_location,)
-    part1           = models.TextField()
-    part2           = models.TextField()
-    part3           = models.TextField()
+    part1           = RichTextUploadingField()
+    part2           = RichTextUploadingField()
+    part3           = RichTextUploadingField()
+
 
 class AnswerListening(models.Model):
     mocktest = models.OneToOneField(MockTest, on_delete=models.CASCADE)
@@ -157,5 +159,26 @@ class AnswerReading(models.Model):
     a39 = models.CharField(max_length=100)
     a40 = models.CharField(max_length=100)
 
-    
+class AnswerWritingChecked(models.Model):
+    mocktest = models.ForeignKey(MockTest, on_delete=models.CASCADE)  
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    band = models.PositiveIntegerField()
+    fedback = models.TextField()  
 
+class AnswerSpeakingChecked(models.Model):
+    mocktest = models.ForeignKey(MockTest, on_delete=models.CASCADE)  
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    band = models.PositiveIntegerField()
+    fedback = models.TextField()  
+
+class AnswerReadingChecked(models.Model):
+    mocktest = models.ForeignKey(MockTest, on_delete=models.CASCADE)  
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    band = models.PositiveIntegerField()
+    correct = models.PositiveIntegerField(default=0)
+
+class AnswerListeningChecked(models.Model):
+    mocktest = models.ForeignKey(MockTest, on_delete=models.CASCADE)  
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    band = models.PositiveIntegerField()
+    correct = models.PositiveIntegerField(default=0)

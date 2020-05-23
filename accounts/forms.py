@@ -6,7 +6,7 @@ from django.contrib.auth import (
     login,
     logout,
 )
-
+from .models import Teacher
 from bootstrap_datepicker_plus import DatePickerInput
 
 User = get_user_model()
@@ -24,42 +24,26 @@ class UserLoginFom(forms.Form):
 
 
 
-class TeacherCreationForm(forms.ModelForm):
-    """A form for creating new users. Includes all the required
-    fields, plus a repeated password."""
-    
-    location = PlainLocationField(based_fields=['education_centre'],
-                                  initial='-22.2876834,-49.1607606')
+class TeacherForm(forms.ModelForm):
     bio = forms.CharField(label='Bio', widget=forms.Textarea(attrs={'rows': 5, 'placeholder':  'Bio '}))
     education_centre = forms.CharField(label = 'Education centre', max_length=50, required=True)
     avatar = forms.ImageField(label='Image',required=False, error_messages = {'invalid':"Image files only"}, widget=forms.FileInput)
     birth_date = forms.DateField(label='Birth date', required=False)
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    phone = forms.DateField(label='Phone number', required=False)
 
     class Meta:
-        model = User
-        fields = ('username',
-                'email',
+        model = Teacher
+        fields = (
                 'bio',
+                'phone',
                 'birth_date',
-                'avatar' , 
-                'password1', 
-                'password2',
                 'education_centre',
                 'location', 
+                'avatar' , 
                 )
         widgets = {
         'birth_date': DatePickerInput(),
         }
-
-    def clean_password2(self):
-        # Check that the two password entries match
-        password1 = self.cleaned_data.get("password1")
-        password2 = self.cleaned_data.get("password2")
-        if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("Passwords don't match")
-        return password2
 
 
 
@@ -77,6 +61,24 @@ class StudentCreationForm(forms.ModelForm):
                 'password2',
                 )
 
+class ProfileForm(forms.ModelForm):
+    username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'autofocus': True }))
+    first_name = forms.CharField(label='First Name', widget=forms.TextInput(attrs={'autofocus': True}))
+    last_name = forms.CharField(label='Last Name', widget=forms.TextInput(attrs={'autofocus': True}))
+    email = forms.CharField(label='Email', widget=forms.EmailInput(attrs={}))
+    password1 = forms.CharField(label='Pasword', widget=forms.PasswordInput(attrs={'placeholder':''}))
+    password2 = forms.CharField(label='Confirm Pasword', widget=forms.PasswordInput(attrs={'placeholder':''}))
+
+    class Meta:
+        model = User
+        fields = ('username',
+                'email',
+                'first_name',
+                'last_name', 
+                'password1', 
+                'password2',
+                )
+
     def clean_password2(self):
         # Check that the two password entries match
         password1 = self.cleaned_data.get("password1")
@@ -84,3 +86,9 @@ class StudentCreationForm(forms.ModelForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("Passwords don't match")
         return password2
+
+class TeacherChangeForm(forms.ModelForm):
+
+    class Meta:
+        model = Teacher
+        fields = '__all__'

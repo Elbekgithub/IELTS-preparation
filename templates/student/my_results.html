@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}mock list{% endblock %}
+
+{% block stylesheet %}
+<style>
+</style>
+{% endblock %}
+
+{% block script %}
+<script>
+</script>
+{% endblock %}
+
+
+{% block main %}
+<div class="row justify-content-center">
+  <div class="col-10">
+      <!-- Editable table -->
+      <h5 class="my-4 dark-grey-text font-weight-bold">My Results</h5>
+      <div class="card">
+        <div class="card-body px-4 my-3" >
+          {% for answer in write_results %}
+            <div class="row">
+              <div class="col-md-6">
+                <table class="table table-bordered table-sm">
+                  <tbody>
+                        <th>Listening</th>
+                          <td style="text-align: center;">{{ answer.mocktest.answerlisteningchecked_set.first.band }}</td>
+                      </tr>
+                      <tr>
+                        <th>Reading</th>
+                          <td style="text-align: center;">{{ answer.mocktest.answerreadingchecked_set.first.band }}</td>
+                      </tr>
+                      <tr>
+                        <th>Writing</th>
+                          <td style="text-align: center;">{{ answer.mocktest.answerwritingchecked_set.first.band }}</td>
+                      </tr>
+                      <tr>
+                        <th>Speaking</th>
+                          <td style="text-align: center;">{{ answer.mocktest.answerspeakingchecked_set.first.band }}</td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md-6">
+                <p>Test name: <span class="text-muted">&emsp;&emsp;&emsp;{{answer.mocktest}}</span></p>
+                <p>Teacher: <span class="text-muted">&emsp;&emsp;&emsp;&emsp;{{ answer.mocktest.user }}</span></p>
+                <p>Test date: <span class="text-muted">&emsp;&emsp;&emsp;&nbsp; {{ answer.create_time }}</span></p>
+                <br>
+                <a  href="{% url 'student:feedback' answer.mocktest.slug answer.student.pk %}">Feedbacks</a> &emsp;
+                <a  href="{% url 'student:certificate' answer.mocktest.slug answer.student.pk %}">Certificate</a> 
+              </div>
+            </div>
+            <hr>
+            <br>  
+            {% endfor %}
+        </div>
+      </div>
+      <!-- Editable table -->
+    </div>
+</div>
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

@@ -1,0 +1,47 @@
+
+{% extends 'base.html' %}
+{% load mapbox_location_field_tags %}
+{% location_field_includes %}
+{% include_jquery %}
+{% load bootstrap4 %}
+{% block title %}mock list{% endblock %}
+
+{% block stylesheet %}
+{{ form.media.css }}
+<style>
+</style>
+{% endblock %}
+
+{% block script %}
+{{ form.media.js }} 
+<script>
+</script>
+{% endblock %}
+
+
+{% block main %}
+<div class="row justify-content-center">
+  <div class="col-10">
+      <!-- Editable table -->
+      <h5 class="my-4 dark-grey-text font-weight-bold">Profile</h5>
+      <div class="card">
+        <div class="card-body" >
+            <form class="p-3"  action="" method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                {% bootstrap_form form%}
+                {% buttons %}
+                    <button type="submit" class="btn btn-outline-info  waves-effect z-depth-0 float-right">
+                        Save changes
+                    </button>
+                {% endbuttons %}
+            </form>
+        </div>
+       </div>
+    </div>
+</div>
+{{ form.media.js }}
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

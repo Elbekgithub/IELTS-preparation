@@ -9,6 +9,7 @@
   <title>{% block title %}{% endblock %}</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link href="https://fonts.googleapis.com/css?family=Spicy+Rice"rel="stylesheet">
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   <!-- Material Design Bootstrap -->
@@ -16,102 +17,152 @@
 
   <!-- Your custom styles (optional) -->
   <style>
-    .hidden-sn{
+    main {
+
+      font-family: calibiri,arial,helvetica;;
+      
+      }
+      header{
+        font-family: 'Roboto', cursive;
+      }
+    .container{
       background-color: white;
     }
-    .btn-outline-white{
-      border: 1px solid white !important;
+   
+    .dropdown:hover>.dropdown-menu {
+      display: block;
+    }
+    
+    .dropdown>.dropdown-toggle:active {
+      /*Without this, clicking will make it sticky*/
+        pointer-events: none;
     }
   </style>
   {% block stylesheet %}
   {% endblock %}
 </head>
 
-<body class="hidden-sn light-blue-skin ">
+<body class="hidden-sn light-blue-skin">
 
   <!--Double navigation-->
   <header>
-      <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
-      <a class="navbar-brand" href="#"><strong>IELTS preparation</strong></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse " id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto ml-5">
+    <div class="container px-0">
+      <nav class="navbar navbar-expand-lg navbar-dark black mb-0 mx-0" >
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a href="{% url 'main:index' %}" class="hr">
+                <button type="button" class="btn btn-warning p-1" style="height: 35px; width: 40px;"><i class="fas fa-home fa-2x" aria-hidden="true"></i></button>
+                </a>
               </li>
-              <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Listening
-                  </a>
-                  <div class="dropdown-menu dropdown-blue" aria-labelledby="navbarDropdownMenuLink-333">
+              <li class="nav-item">
+              <div class="dropdown">
+
+                <!--Trigger-->
+                <a class="btn btn-outline-warning dropdown-toggle p-2 px-4 mx-3 " type="button" id="dropdownMenu2" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false" style="font-weight: bold;">Listening</a>
+
+
+                <!--Menu-->
+                <div class="dropdown-menu dropdown-warning">
+                  <a class="dropdown-item" href="#">Practice</a>
+                  <a class="dropdown-item" href="#">Tips</a>
+                </div>
+              </div>
+              </li>
+              <li class="nav-item">
+                <div class="dropdown">
+  
+                  <!--Trigger-->
+                  <a class="btn btn-outline-warning dropdown-toggle p-2 px-4  mx-3" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" style="font-weight: bold;">Reading</a>
+  
+  
+                  <!--Menu-->
+                  <div class="dropdown-menu dropdown-warning">
                     <a class="dropdown-item" href="#">Practice</a>
                     <a class="dropdown-item" href="#">Tips</a>
                   </div>
-                </li>
-              <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Reading
-                  </a>
-                  <div class="dropdown-menu dropdown-blue" aria-labelledby="navbarDropdownMenuLink-333">
-                    <a class="dropdown-item" href="#">Practice</a>
-                    <a class="dropdown-item" href="#">Tips</a>
-                  </div>
-                </li>
-              <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Writing
-                  </a>
-                  <div class="dropdown-menu dropdown-blue" aria-labelledby="navbarDropdownMenuLink-333">
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="dropdown">
+  
+                  <!--Trigger-->
+                  <a class="btn btn-outline-warning dropdown-toggle p-2 px-4  mx-3" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" style="font-weight: bold;">Writing</a>
+  
+  
+                  <!--Menu-->
+                  <div class="dropdown-menu dropdown-warning">
                     <a class="dropdown-item" href="#">Task 1</a>
                     <a class="dropdown-item" href="#">Task 2</a>
-                    <a class="dropdown-item" href="#">Vocabulry</a>
+                    <a class="dropdown-item" href="#">Vocabulary</a>
                     <a class="dropdown-item" href="#">Tips</a>
                   </div>
-                </li>
-              <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Speaking
-                  </a>
-                  <div class="dropdown-menu dropdown-blue" aria-labelledby="navbarDropdownMenuLink-333">
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="dropdown">
+  
+                  <!--Trigger-->
+                  <a class="btn btn-outline-warning dropdown-toggle p-2 px-4  mx-3" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" style="font-weight: bold;">Speaking</a>
+  
+  
+                  <!--Menu-->
+                  <div class="dropdown-menu dropdown-warning">
                     <a class="dropdown-item" href="#">Practice</a>
-                    <a class="dropdown-item" href="#">Vocabulry</a>
+                    <a class="dropdown-item" href="#">Vocabulary</a>
                     <a class="dropdown-item" href="#">Tips</a>
                   </div>
-                </li>
-          </ul>
-          <ul class="navbar-nav ">
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'accounts:login' %}">
-                    <button class="btn btn-outline-white btn-sm my-0 mx-0 py-1 px-2" type="submit">Sign in</button>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'accounts:student_create' %}">
-                    <button class="btn btn-outline-white btn-sm my-0 mx-0 py-1 px-2" type="submit">Sign up</button>
-                  </a>
-                </li>
-          </ul>
-      </div>
+                </div>
+              </li>
+            </ul>
+            <ul class="navbar-nav ">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:login' %}">
+                  <button type="button" class="btn btn-warning  p-2"><i class="fas fa-sign-in-alt" aria-hidden="true"></i>Sign in</button>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:student_create' %}">
+                  <button type="button" class="btn btn-warning  p-2"><i class="fas fa-user-plus " aria-hidden="true"></i> Sign up</button>
+                </a>
+              </li>
+            </ul>
+
+          </div>
       </nav>
+    </div>
   </header>
   <!--/.Double navigation-->
 
   <!--Main Layout-->
-  <main>
-    <div class="container">
+  <main class="py-0">
+    <div class="container p-5" style="background-color: white;">
     {% block main%}
     {% endblock %}
   </div>
   </main>
   <!--Main Layout-->
-
+  <footer>
+    <div class="container p-5" style="border-top: 5px solid #FFBB33; background-color:#505050">
+      <h5 style="color: #FFBB33;">This is Footer part</h5>
+      <h4>Allayorov Elbek</h4>
+    {% block footer %}
+    {% endblock %}
+  </div>
+  </footer>
 
 
   <!-- SCRIPTS -->
   <!-- JQuery -->
-  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script> 
   <!-- Bootstrap tooltips -->
   <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
   <!-- Bootstrap core JavaScript -->

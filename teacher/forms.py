@@ -1,6 +1,7 @@
 from django import forms 
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
-from .models import MockTest, Listening, Reading, Writing, Speaking, AnswerListening, AnswerReading
+from .models import *
 
 class NewMockForm(forms.ModelForm):
     name = forms.CharField(label=False, widget=forms.TextInput(attrs={'placeholder':'Name'}))
@@ -14,27 +15,34 @@ class NewMockForm(forms.ModelForm):
         fields = ('name', 'bio', 'is_free', 'fee', 'time_start', 'speak_date',)
 
 class ListeningForm(forms.ModelForm):
-    audio = forms.FileField(label='Audio', widget=forms.FileInput(attrs={'id': 'inputGroupFile01','class':'clearablefileinput'}))
-    section1 = forms.CharField(label=False, widget=forms.Textarea(attrs={'id': 'inputplugin','placeholder':'section1'}))
-    section2 = forms.CharField(label=False, widget=forms.Textarea(attrs={'placeholder':'section2'}))
-    section3 = forms.CharField(label=False, widget=forms.Textarea(attrs={'placeholder':'section3'}))
-    section4 = forms.CharField(label=False, widget=forms.Textarea(attrs={'placeholder':'section4'}))
+    audio = forms.FileField(label='Audio')
+    section1 = forms.CharField(label='Section 1', widget=CKEditorUploadingWidget())
+    section2 = forms.CharField(label='Section 2', widget=CKEditorUploadingWidget())
+    section3 = forms.CharField(label='Section 3', widget=CKEditorUploadingWidget())
+    section4 = forms.CharField(label='Section 4', widget=CKEditorUploadingWidget())
     class Meta:
         model = Listening
         fields = ('audio', 'pdf', 'section1','section2','section3','section4', )
 
 class ReadingForm(forms.ModelForm):
-    passage1 = forms.CharField(label=False, widget=forms.Textarea(attrs={'id': 'demoTranslations','placeholder':'passage'}))
+    passage1 = forms.CharField(label='Passage 1', widget=CKEditorUploadingWidget())
+    passage2 = forms.CharField(label='Passage 2', widget=CKEditorUploadingWidget())
+    passage3 = forms.CharField(label='Passage 3', widget=CKEditorUploadingWidget())
     class Meta:
         model = Reading
         fields = ('pdf', 'passage1','passage2','passage3', )
 
 class WritingForm(forms.ModelForm):
+    task1 = forms.CharField(label='Task 1', widget=CKEditorUploadingWidget())
+    task2 = forms.CharField(label='Task 2', widget=CKEditorUploadingWidget())
     class Meta:
         model = Writing
         fields = ('pdf', 'task1','task2','image', )
 
 class SpeakingForm(forms.ModelForm):
+    part1 = forms.CharField(label='Part 1', widget=CKEditorUploadingWidget())
+    part2 = forms.CharField(label='Part 2', widget=CKEditorUploadingWidget())
+    part3 = forms.CharField(label='Part 3', widget=CKEditorUploadingWidget())
     class Meta:
         model = Speaking
         fields = ('pdf', 'part1','part2','part3', )
@@ -155,3 +163,15 @@ class AnswerReadingUpdateForm(forms.ModelForm):
         'a16','a17','a18','a19','a20','a21','a22','a23','a24',
         'a25','a26','a27','a28','a29','a30','a31','a32','a33',
         'a34','a35','a36','a37','a38','a39','a40',)
+
+class AnswerWritingCheckForm(forms.ModelForm):
+
+    class Meta:
+        model = AnswerWritingChecked
+        fields = ('band', 'fedback')
+
+class AnswerSpeakingCheckForm(forms.ModelForm):
+
+    class Meta:
+        model = AnswerSpeakingChecked
+        fields = ('band', 'fedback')

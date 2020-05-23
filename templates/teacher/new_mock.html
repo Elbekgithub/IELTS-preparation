@@ -19,16 +19,16 @@ $('.datepicker').pickadate({format:'yyyy-mm-dd',formatSubmit: 'yyyy-mm-dd', });
 
 {% block main %}
 <div class="row justify-content-center">
-  <div class="col-6">
+  <div class="col-md-6">
       <!-- Editable table -->
-      <div class="card">
-        <h5 class="card-header white-text text-center"><strong>New Test</strong></h5>
+      <div class="card my-2">
         <div class="card-body">
-          <form class="p-3" style="color: #757575;" action="" method="post" enctype="multipart/form-data" novalidate>
+        <h5 class="my-4 dark-grey-text font-weight-bold text-center text-capitalize">New mock test</h5>
+          <form class="" action="" method="post" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
             {% bootstrap_form form size="small" label_class="form-label col-md-3"%}
             {% buttons %}
-                <button type="submit" class="btn btn-outline-default py-2 px-5 z-depth-1" style="border: 1.5px solid #3F5C80 !important">
+                <button type="submit" class="btn btn-outline-default py-2 px-5 z-depth-1 float-right" style="border: 1.5px solid #3F5C80 !important">
                     Submit
                 </button>
             {% endbuttons %}

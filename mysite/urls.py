@@ -10,7 +10,7 @@ urlpatterns = [
     path('accounts/', include(('accounts.urls', 'accounts') ,namespace='accounts')),
     path('teacher/', include(('teacher.urls','teacher'), namespace='teacher')),
     path('student/', include(('student.urls', 'student'), namespace='student')),
-
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 
 ]
 

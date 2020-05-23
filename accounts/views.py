@@ -5,7 +5,56 @@ from django.contrib.auth import (
     logout,
 )
 from .models import Teacher, Student
-from .forms import UserLoginFom, TeacherCreationForm, StudentCreationForm
+from .forms import UserLoginFom, TeacherForm, StudentCreationForm, ProfileForm, TeacherChangeForm
+
+
+def profile(request):
+    user = request.user
+    if request.method =='POST':
+        form = ProfileForm(request.POST or None, instance=user)
+        if form.is_valid():
+            form.save()
+            if user.is_student:
+                return redirect('accounts:profile')
+            else:
+                return redirect('accounts:teacher_profile')
+    else:
+        form = ProfileForm()
+    context = {
+        'form':form,
+    }
+    return render(request, 'accounts/profile.html' , context)
+
+def teacher_change(request):
+    user = request.user
+    teacher = Teacher.objects.get(user=user)
+    if request.method == 'POST':
+        form = TeacherChangeForm(request.POST or None, instance=teacher)
+        if form.is_valid():
+            teacher = form.save(commit=False)
+            teacher.user = user
+            teacher.save()
+            return redirect('accounts:teacher_profile')
+    else:
+        form = TeacherChangeForm(instance=teacher)
+    return render (request, 'accounts/profile.html', {'form':form})
+
+def teacher_profile(request):
+    user = request.user
+    teacher = Teacher.objects.get(user=user)
+    form = ProfileForm(instance=user)
+    form1 = TeacherChangeForm(instance=teacher)
+    a = teacher.location
+    x = a[0]
+    y = a[1]
+    context = {
+        'teacher':teacher,
+        'x':x,
+        'y':y,
+        'form':form,
+        'form1':form1,
+    }
+    return render(request, 'accounts/teacher_profile.html', context)
 
 def login_view(request):
     title = "Sign in"

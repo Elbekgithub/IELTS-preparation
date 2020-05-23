@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}mock list{% endblock %}
+
+{% block stylesheet %}
+<style>
+    .signature, .title { 
+        float:left;
+          border-top: 1px solid #000;
+          width: 200px; 
+          text-align: center;
+        }
+</style>
+{% endblock %}
+
+{% block script %}
+<script>
+</script>
+{% endblock %}
+
+
+{% block main %}
+<div class="row justify-content-center">
+  <div class="col-10">
+      <!-- Editable table -->
+      <a class="float-right" href="{% url 'student:download' listening.mocktest.slug listening.student.pk %}" type="application/octet-stream .pdf" target="_blank" role="button" >
+        <i class="fa fa-download mt-4" aria-hidden="true" style="color: black; font-size: 30px;"></i></a>
+        <h5 class="my-4"><a class="dark-grey-text font-weight-bold" href="{% url 'student:my_results' %}">My results</a> / 
+          <span class="text-muted font-weight-bold">Certificate</span></h5>
+      <div class="card">
+        <div class="card-body px-0 my-0 mx-0 py-0" >
+              <div style="padding:20px; text-align:center; border: 10px solid #787878">
+                <div style=" padding:20px; text-align:center; border: 5px solid #787878">
+                       <span style="font-size:50px; font-weight:bold">Certificate of Mocktest</span>
+                       <br><br>
+                       <span style="font-size:25px"><i>This is to certify that {{ listening.mocktest }} mocktest has been taken by</i></span>
+                       <br><br>
+                       <span style="font-size:30px"><b>{{ listening.student.get_full_name|default:listening.student.username }}</b></span><br/><br/>
+                       <span style="font-size:20px">with score as below:</b></span> <br/><br/>
+                       <hr width="800px">
+                       <div class="row justify-content-center" >
+                       <div class="row justify-content-center" style=" width:1000px;">
+                         <div class="col-2 col-md-2 col-ls-2 col-sm-2">Listeng <span class="btn btn-outline-default py-1 mr-1 px-3 z-depth-0" style="border: 1.5px solid #F2F2F2 !important; background-color: #F2F2F2 !important; "><b>{{ listening.band }}</b></span></span></div>
+                         <div class="col-2 col-md-2 col-ls-2 col-sm-2">Reading <span class="btn btn-outline-default py-1 mr-1 px-3 z-depth-0" style="border: 1.5px solid #f2f2f2 !important; background-color: #F2F2F2 !important; " ><b>{{ reading.band }}</b></span></div>
+                         <div class="col-2 col-md-2 col-ls-2 col-sm-2">Writing <span class="btn btn-outline-default py-1 mr-1 px-3 z-depth-0" style="border: 1.5px solid #F2F2F2 !important; background-color: #F2F2F2 !important;"><b>{{ writing.band }}</b></span></div>
+                         <div class="col-2 col-md-2 col-ls-2 col-sm-2">Speaking <span class="btn btn-outline-default py-1 mr-1 px-3 z-depth-0" style="border: 1.5px solid #F2F2F2 !important; background-color: #F2F2F2 !important;"><b>{{ speaking.band }}</b></span></div>
+                         <div class="col-2 col-md-2 col-ls-2 col-sm-2">Overall <span class="btn btn-outline-default py-1 mr-1 px-3 z-depth-0" style="border: 1.5px solid #F2F2F2 !important; background-color: #F2F2F2 !important;"><b>{{ overall }}</b></span></div>
+                       </div>
+                       </div>
+                       <hr width="800px">
+                       <br/><br/>
+                       <div class="row">
+                         <div class="col-4 col-md-4 col-ls-4 col-sm-4">
+                          <span style="font-size:20px"><i>{{ writing.mocktest.user.get_full_name|default:writing.mocktest.user.username }}</i></span><hr style="width: 250px;">
+                          <span><i>Test Maker</i></span>
+                         </div>
+                         <div class="col-4 col-md-4 col-ls-4 col-sm-4">
+                          <span style="font-size:20px"><i>{{ answer_write.create_time }}</i></span><hr style="width: 250px;">
+                          <span><i>Test Date</i></span>
+                        </div>
+                        <div class="col-4 col-md-4 col-ls-4 col-sm-4">
+                          <br>
+                          <span style="font-size:27px"><i>IELTS Preparation</i></span><br>
+                        </div>
+                       </div>
+                </div>
+              </div>
+        </div>
+       </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

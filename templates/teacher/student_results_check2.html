@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block title %}mock list{% endblock %}
+
+{% block stylesheet %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+<script>
+  CKEDITOR.replace( '.richtexteditor' );
+</script>
+{% endblock %}
+
+
+{% block main %}
+  
+<!-- Nav tabs -->
+<div class="row justify-content-center">
+  <div class="col-md-10">
+    <h5 class="my-4"><a class="dark-grey-text font-weight-bold" href="{% url 'teacher:student_results' %}">Student results</a> / 
+      <span class="text-muted font-weight-bold">Writing</span></h5>
+    <div class="card">
+      <div class="card-body" >
+        <a class="float-right" href="{{ answer_speaking.pdf.url }}" type="application/octet-stream .pdf" target="_blank" role="button" >
+          <i class="fa fa-download mx-4 mb-4" aria-hidden="true" style="color: black; font-size: 30px;"></i></a>
+          {{ answer_speaking.student }}
+          <br>
+          {{ answer_speaking.task1 }}
+          <br>
+          {{ answer_speaking.task1 }}
+        <br>
+        {% if answer_speaking.is_checked %}
+        <p>Tekshirilgan</p>
+        {% else %}
+        <p>Tekshirilmagan</p>
+        {% endif %}
+        <form class="" action="" method="post" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
+          {% bootstrap_form form size="small" label_class="form-label col-md-3"%}
+          {% buttons %}
+              <button type="submit" class="btn btn-outline-default py-2 px-5 z-depth-1 float-right" style="border: 1.5px solid #3F5C80 !important">
+                  Submit
+              </button>
+          {% endbuttons %}
+        </form>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- Nav tabs -->
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

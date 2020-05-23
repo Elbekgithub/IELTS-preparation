@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}mock list{% endblock %}
+
+{% block stylesheet %}
+<style>
+</style>
+{% endblock %}
+
+{% block script %}
+<script>
+</script>
+{% endblock %}
+
+
+{% block main %}
+<div class="row justify-content-center">
+  <div class="col-10">
+      <!-- Editable table -->
+      <h5 class="my-4"><a class="dark-grey-text font-weight-bold" href="{% url 'student:my_results' %}">My results</a> / 
+        <span class="text-muted font-weight-bold">Feedbacks</span></h5>
+      <div class="card">
+        <div class="card-body px-4 my-3" >
+            <div class="row">
+                <div class="col-md-3">
+                    <h4>Listening</h4>
+                    <p>Correct answers: {{ listening.correct }}</p>
+                    <p>Band: {{ listening.band }}</p>
+                </div>
+                <div class="col-md-3">
+                    <h4>Reading</h4>
+                    <p>Correct answers: {{ reading.correct }}</p>
+                    <p>Band: {{ reading.band }}</p>
+                </div>
+                <div class="col-md-3">
+                    <h4>Writing</h4>
+                    <p>Band: {{ writing.band }}</p>
+                </div>
+                <div class="col-md-3">
+                    <h4>Speaking</h4>
+                    <p>Band: {{ speaking.band }}</p>
+                </div>
+            </div>    
+            <hr>
+            <h4>Feedback for Writing</h4>
+            <p class="text-justify">{{ writing.fedback }}</p>
+            <h4>Feedback for Speaking</h4>
+            <p class="text-justify">{{ writing.fedback }}</p>
+        </div>
+       </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

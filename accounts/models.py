@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-from location_field.forms.plain import PlainLocationField
+from mapbox_location_field.models import LocationField, AddressAutoHiddenField
 
 # Create your models here.
 
@@ -21,10 +21,14 @@ class User(AbstractUser):
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
+    def __str__(self):
+        return self.user.username
+
 class Teacher(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     bio = models.TextField(max_length=500, blank=True)
     education_centre = models.CharField(max_length=255)
-    location = PlainLocationField(based_fields=['education_centre'], zoom=7)
+    location = LocationField(map_attrs={"center": [41.3,69.26667], "marker_color": "blue"}, null=True, blank=True)
+    phone = models.CharField(max_length=30, default = '')
     birth_date = models.DateField(null=True, blank=True)
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)

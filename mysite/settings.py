@@ -27,10 +27,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    'location_field.apps.DefaultConfig',
-
+    'mapbox_location_field',
     'bootstrap_datepicker_plus',
-
+    'ckeditor',
+    'ckeditor_uploader',
     'bootstrap4',
     'main',
     'blog',
@@ -123,8 +123,6 @@ AUTH_USER_MODEL = 'accounts.User'
 AUTHENTICATION_BACKENDS = ('accounts.backends.EmailBackend',)
 
 
-
-
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
@@ -135,6 +133,22 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_cdn')
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media_cdn')
 
+
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'
+CKEDITOR_UPLOAD_PATH = 'uploads'
+CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_RESTRICT_BY_USER = False
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'advanced',
+        'height': 300,
+        'width': '120%',
+    },
+}
+
+MAPBOX_KEY = "pk.eyJ1IjoiYWxsb3lvcm92ZWxiZWsiLCJhIjoiY2s5ZnA3eTRiMGR0eDNlcW1hMDFna3A0biJ9.Jw4TnqSliBdenFpOiOu6qA"
 
 
 LOCATION_FIELD_PATH = STATIC_URL + 'location_field'
